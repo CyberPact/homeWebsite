@@ -236,6 +236,20 @@ body {
   cursor: pointer;
 }
 
+.testimonial-card {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.fade-out {
+  opacity: 0;
+  transform: translateX(10px);
+}
+
+.fade-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 /* Contact Section */
 .contact-section {
   height: 761px;
