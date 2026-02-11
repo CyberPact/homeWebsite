@@ -224,6 +224,18 @@ body {
   font-size: 35px;
 }
 
+.faq-content {
+  display: none;
+}
+
+.faq-item.active .faq-content {
+  display: block;
+}
+
+.faq-item {
+  cursor: pointer;
+}
+
 /* Contact Section */
 .contact-section {
   height: 761px;
