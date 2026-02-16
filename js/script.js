@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                                         ${project.description ? `<p class="mb-1 small">${project.description}</p>`: ''}
                                         <span class="badge bg-primary">${project.app_type}</span>
                                         <br/>
-                                        ${project.website_link ? `<a href="${project.website_link}" target="_blank" class="btn btn-sm btn-outline-light mt-2">View Project</a>` : ''}
+                                        ${project.website_link ? `<a href="${project.website_link}" target="_blank" class="btn btn-sm btn-outline-light mt-2">Visit Site</a>` : ''}
                                     </div>
                                 </div>
                             </div>
