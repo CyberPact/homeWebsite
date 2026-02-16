@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             card.classList.add("fade-out");
 
             setTimeout(() => {
-                avatar.src = data.avatar || "";
+                avatar.src = data.avatar || "assets/pic-profile.svg";
                 quote.textContent = "“" + data.quote + "”";
                 name.textContent = data.name;
                 role.textContent = data.role;
@@ -159,6 +159,50 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         renderTestimonial(currentIndex);
         startAutoSlide();
+    }
+
+    // ============================================================================
+    // PROJECTS/GALLERY INTEGRATION
+    // ============================================================================
+
+    const galleryContainer = document.querySelector('#solutions .row.g-4');
+
+    if (galleryContainer) {
+        try {
+            const response = await fetch(`${CYBPACT_API}/portfolio`);
+            
+            if (response.ok) {
+                const projects = await response.json();
+                
+                if (Array.isArray(projects) && projects.length > 0) {
+                    // Clear placeholder content
+                    galleryContainer.innerHTML = '';
+                    
+                    // Render projects
+                    projects.forEach(project => {
+                        const projectCard = `
+                            <div class="col-lg-4 col-md-6">
+                                <div class="position-relative overflow-hidden rounded gallery-image" style="height: 400px;">
+                                    <img src="${project.image_url}" alt="${project.title}" class="w-100 h-100 object-fit-cover">
+                                    <div class="position-absolute bottom-0 start-0 w-100 p-3 bg-dark bg-opacity-75 text-white">
+                                        <h5 class="mb-1 fw-bold">${project.title}</h5>
+                                        ${project.description ? `<p class="mb-1 small">${project.description}</p>`: ''}
+                                        <span class="badge bg-primary">${project.app_type}</span>
+                                        <br/>
+                                        ${project.website_link ? `<a href="${project.website_link}" target="_blank" class="btn btn-sm btn-outline-light mt-2">View Project</a>` : ''}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        galleryContainer.innerHTML += projectCard;
+                    });
+                }
+            } else {
+                console.error('Failed to fetch projects');
+            }
+        } catch (error) {
+            console.error('Error loading projects:', error);
+        }
     }
 
     // ============================================================================
